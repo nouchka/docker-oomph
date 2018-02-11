@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:User
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    name="developer"
+    unsignedPolicy="ACCEPT">
+  <setupTask
+      xsi:type="setup:VariableTask"
+      type="FOLDER"
+      name="install.root"
+      value="/home/developer/eclipse"
+      defaultValue="/home/developer"
+      label="Root install folder">
+    <description>The root install folder where all the products are installed</description>
+  </setupTask>
+  <attributeRule
+      attributeURI="http://www.eclipse.org/oomph/setup/1.0#//InstallationTask/location"
+      value="${install.root/}${installation.id}"/>
+  <acceptedLicense>b07033d74ce6e9d1e6b4962f82c07d1 http://www.opensource.org/licenses/mit-license.php</acceptedLicense>
+  <acceptedLicense>6a3d083ad2bd7d3a80ee293235f8c5b1 Eclipse Foundation Software User Agreement</acceptedLicense>
+  <acceptedLicense>b854c0b41057d635a7ccaf7d72fe826f Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</acceptedLicense>
+  <acceptedLicense>121140a2cbaa22d157099dd10a242d92 Eclipse Public License - v 1.0</acceptedLicense>
+  <acceptedLicense>a7ba70452ec393624398b45cf5c4a2be Copyright [2012] [Robert Gründler]</acceptedLicense>
+  <acceptedLicense>bc350e117ff281b64220aef986bfdcae Redistribution and use in source and binary forms, with or without</acceptedLicense>
+  <acceptedLicense>30d252f582a9f4ebadd81c36d1b23c52 Eclipse Public License - v 1.0</acceptedLicense>
+  <acceptedLicense>a4fed4134aa56f2e173b60712ccbc3a3 Licence MIT</acceptedLicense>
+</setup:User>
