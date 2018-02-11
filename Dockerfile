@@ -1,0 +1,2 @@
+FROM nouchka/eclipse:oxygen
+
