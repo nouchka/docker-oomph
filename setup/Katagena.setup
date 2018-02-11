@@ -32,6 +32,46 @@
         key="/instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources"
         value="false"/>
   </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="org.eclipse.core.resources">
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/org.eclipse.core.resources/encoding"
+        value="UTF-8"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="org.eclipse.ui.ide">
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/org.eclipse.ui.ide/EXIT_PROMPT_ON_CLOSE_LAST_WINDOW"
+        value="false"/>
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/org.eclipse.ui.ide/quickStart"
+        value="false"/>
+  </setupTask>
+  <setupTask
+     xsi:type="setup:CompoundTask"
+      name="org.eclipse.ui.editors">
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/org.eclipse.ui.editors/showWhitespaceCharacters"
+        value="true"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="org.eclipse.ui">
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/org.eclipse.ui/SHOW_TEXT_ON_PERSPECTIVE_BAR"
+        value="false"/>
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/org.eclipse.ui/showIntro"
+        value="false"/>
+  </setupTask>
   <version name="php"
       label="Oxygen PHP"
       requiredJavaVersion="1.8">
@@ -78,26 +118,6 @@
           name="org.phpsrc.eclipse.pti.tools.phpmd.feature.group"/>
       <repository
           url="http://p2-dev.pdt-extensions.org/"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:CompoundTask"
-        name="org.eclipse.ui.editors">
-      <setupTask
-          xsi:type="setup:PreferenceTask"
-          key="/instance/org.eclipse.ui.editors/showWhitespaceCharacters"
-          value="true"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:CompoundTask"
-        name="org.eclipse.ui">
-      <setupTask
-          xsi:type="setup:PreferenceTask"
-          key="/instance/org.eclipse.ui/SHOW_TEXT_ON_PERSPECTIVE_BAR"
-          value="false"/>
-      <setupTask
-          xsi:type="setup:PreferenceTask"
-          key="/instance/org.eclipse.ui/showIntro"
-          value="false"/>
     </setupTask>
     <setupTask
         xsi:type="setup:PreferenceTask"
