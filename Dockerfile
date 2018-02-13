@@ -1,28 +1,59 @@
-FROM nouchka/eclipse:oxygen
+ARG  BASE_IMAGE=debian:jessie
+FROM ${BASE_IMAGE}
+MAINTAINER Jean-Avit Promis "docker@katagena.com"
 
 ARG ECLIPSE_OOMPH_INSTALLER_TAR_URL=http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/oomph/products/eclipse-inst-linux64.tar.gz
 ENV ECLIPSE_OOMPH_INSTALLER_DIRECTORY=/opt
+ARG PUID=1000
+ARG PGID=1000
+ARG BASE_IMAGE=debian:jessie
+ARG DOCKER_TAG=php5
+LABEL version="${DOCKER_TAG}"
 
-USER root
-RUN wget ${ECLIPSE_OOMPH_INSTALLER_TAR_URL} -O /tmp/eclipse-inst.tar.gz -q && \
+ENV PUID ${PUID}
+ENV PGID ${PGID}
+
+RUN apt-get update && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install wget git subversion libcanberra-gtk3-module curl lintian fakeroot ssh-askpass openssh-client rsync python unzip && \
+	[ "$DOCKER_TAG" != "php7" ] || apt-get -yq install openjdk-8-jdk php7.0 php-cli php-xdebug php-intl php-xml && \
+	[ "$DOCKER_TAG" != "php5" ] || apt-get -yq install openjdk-7-jdk php5 php5-cli php5-xdebug && \
+	[ "$DOCKER_TAG" != "latest" ] || apt-get -yq install openjdk-8-jdk && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+	wget ${ECLIPSE_OOMPH_INSTALLER_TAR_URL} -O /tmp/eclipse-inst.tar.gz -q && \
 	tar -xf /tmp/eclipse-inst.tar.gz -C ${ECLIPSE_OOMPH_INSTALLER_DIRECTORY} && \
-	rm /tmp/eclipse-inst.tar.gz
+	rm /tmp/eclipse-inst.tar.gz && \
+	[ "$DOCKER_TAG" = "latest" ] || wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer && \
+	[ "$DOCKER_TAG" = "latest" ] || chmod a+x php-cs-fixer && \
+	[ "$DOCKER_TAG" = "latest" ] || mv php-cs-fixer /usr/local/bin/php-cs-fixer && \
+	[ "$DOCKER_TAG" = "latest" ] || curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+	[ "$DOCKER_TAG" = "latest" ] || php /usr/local/bin/composer self-update
 
-RUN mkdir -p /home/developer/.p2/pool/
-RUN mkdir -p /home/developer/.eclipse/org.eclipse.oomph.setup/setups/
-RUN mkdir -p /home/developer/.eclipse/org.eclipse.oomph.p2/
-
-##RUN echo "/home/developer/.p2/pool" > /home/developer/.p2/pools.info
 COPY setup/Katagena.setup /home/developer/.p2/pool/Katagena.setup
 COPY user.setup /home/developer/.eclipse/org.eclipse.oomph.setup/setups/user.setup
 COPY user.products.setup /home/developer/.eclipse/org.eclipse.oomph.setup/setups/user.products.setup
 COPY agents.info /home/developer/.eclipse/org.eclipse.oomph.p2/agents.info
 COPY defaults.info /home/developer/.eclipse/org.eclipse.oomph.p2/defaults.info
+COPY launch.sh /launch.sh
 
-RUN chown -R developer: /home/developer/
+RUN export uid=${PUID} gid=${PGID} && \
+	mkdir -p /home/developer/workspace && \
+	echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
+	echo "developer:x:${uid}:" >> /etc/group && \
+	chmod +x /launch.sh && \
+	chown developer: /launch.sh && \
+	chown -R developer: /${ECLIPSE_OOMPH_INSTALLER_DIRECTORY}/ && \
+	mkdir -p /home/developer/.p2/pool/ && \
+	mkdir -p /home/developer/.eclipse/org.eclipse.oomph.setup/setups/ && \
+	mkdir -p /home/developer/.eclipse/org.eclipse.oomph.p2/ && \
+	chown -R developer: /home/developer/ && \
+	chown ${uid}:${gid} -R /home/developer
 
 USER developer
+ENV HOME /home/developer
 
+CMD /launch.sh
+
+##RUN echo "/home/developer/.p2/pool" > /home/developer/.p2/pools.info
 ## Make update permanent
 ## VOLUME ${ECLIPSE_OOMPH_INSTALLER_DIRECTORY}/eclipse-inst
 

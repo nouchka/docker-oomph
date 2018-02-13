@@ -4,7 +4,6 @@ services:
   eclipse_installer:
     build: .
     image: nouchka/oomph
-    entrypoint: /opt/eclipse-installer/eclipse-inst
     environment:
       - DISPLAY=unix$DISPLAY
       - ECLIPSE_VERSION=katagena-oxygen
