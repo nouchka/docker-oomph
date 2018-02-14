@@ -8,7 +8,8 @@ build-all: build
 	export DOCKER_TAG=php5;export IMAGE_NAME="nouchka/oomph:php5"; ./hooks/build
 	export DOCKER_TAG=php7;export IMAGE_NAME="nouchka/oomph:php7"; ./hooks/build
 
-test: build
+test:
+	docker-compose build
 	docker-compose up -d
 
 clean:

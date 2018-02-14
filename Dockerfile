@@ -1,4 +1,4 @@
-ARG  BASE_IMAGE=debian:jessie
+ARG  BASE_IMAGE=ubuntu:xenial
 FROM ${BASE_IMAGE}
 MAINTAINER Jean-Avit Promis "docker@katagena.com"
 
@@ -6,8 +6,8 @@ ARG ECLIPSE_OOMPH_INSTALLER_TAR_URL=http://ftp-stud.fht-esslingen.de/pub/Mirrors
 ENV ECLIPSE_OOMPH_INSTALLER_DIRECTORY=/opt
 ARG PUID=1000
 ARG PGID=1000
-ARG BASE_IMAGE=debian:jessie
-ARG DOCKER_TAG=php5
+ARG BASE_IMAGE=ubuntu:xenial
+ARG DOCKER_TAG=php7
 LABEL version="${DOCKER_TAG}"
 
 ENV PUID ${PUID}
@@ -28,11 +28,7 @@ RUN apt-get update && \
 	[ "$DOCKER_TAG" = "latest" ] || curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 	[ "$DOCKER_TAG" = "latest" ] || php /usr/local/bin/composer self-update
 
-COPY setup/Katagena.setup /home/developer/.p2/pool/Katagena.setup
 COPY user.setup /home/developer/.eclipse/org.eclipse.oomph.setup/setups/user.setup
-COPY user.products.setup /home/developer/.eclipse/org.eclipse.oomph.setup/setups/user.products.setup
-COPY agents.info /home/developer/.eclipse/org.eclipse.oomph.p2/agents.info
-COPY defaults.info /home/developer/.eclipse/org.eclipse.oomph.p2/defaults.info
 COPY launch.sh /launch.sh
 
 RUN export uid=${PUID} gid=${PGID} && \
@@ -42,9 +38,7 @@ RUN export uid=${PUID} gid=${PGID} && \
 	chmod +x /launch.sh && \
 	chown developer: /launch.sh && \
 	chown -R developer: /${ECLIPSE_OOMPH_INSTALLER_DIRECTORY}/ && \
-	mkdir -p /home/developer/.p2/pool/ && \
-	mkdir -p /home/developer/.eclipse/org.eclipse.oomph.setup/setups/ && \
-	mkdir -p /home/developer/.eclipse/org.eclipse.oomph.p2/ && \
+	mkdir -p /home/developer/eclipse/ && \
 	chown -R developer: /home/developer/ && \
 	chown ${uid}:${gid} -R /home/developer
 

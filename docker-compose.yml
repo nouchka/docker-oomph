@@ -3,7 +3,7 @@ version: '3'
 services:
   eclipse_installer:
     build: .
-    image: nouchka/oomph
+    image: nouchka/oomph:php7
     environment:
       - DISPLAY=unix$DISPLAY
       - ECLIPSE_VERSION=katagena-oxygen
@@ -12,16 +12,21 @@ services:
       - ~/.gitconfig:/home/developer/.gitconfig:ro
       - ~/.gitignore:/home/developer/.gitignore:ro
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./setup/:/home/developer/setup/
+      - ./setup/:/home/developer/setup/:ro
+      - eclipse:/home/developer/eclipse/
       - installer:/opt/eclipse-installer/ ##volume for the installer to keep update
+  setup:
+    image: nouchka/lighttpd
+    volumes:
+      - ./setup:/var/www/localhost/htdocs
 
 volumes:
   installer:
     driver: local
+  eclipse:
+    driver: local
 
 ##  workspace:
-##    driver: local
-##  eclipse:
 ##    driver: local
 ##  eclipse_configuration:
 ##    driver: local
