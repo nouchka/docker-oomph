@@ -9,6 +9,4 @@
       href="my.products.setup#/"/>
   <projectCatalog
       href="my.projects.setup#/"/>
-  <!--projectCatalog
-      href="com.github.projects.setup#/"/-->
 </setup:Index>

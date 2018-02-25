@@ -20,6 +20,15 @@
         url="${oomph.update.url}"/>
   </setupTask>
   <setupTask
+      xsi:type="setup:VariableTask"
+      type="FOLDER"
+      name="install.root"
+      value="/home/developer/eclipse"
+      defaultValue="/home/developer"
+      label="Root install folder">
+    <description>The root install folder where all the products are installed</description>
+  </setupTask>
+  <setupTask
       xsi:type="setup.p2:P2Task"
       label="git"
       licenseConfirmationDisabled="true">
@@ -99,10 +108,14 @@
             name="net.nodj.AutoDerivFeature.feature.group"/>
         <requirement
             name="org.eclipse.oomph.setup.feature.group"/>
+        <requirement
+            name="net.vtst.ow.eclipse.less.feature.group"/>
         <repository
             url="http://download.eclipse.org/releases/oxygen"/>
         <repository
             url="http://nodj.github.io/AutoDeriv/update"/>
+	    <repository
+            url="http://www.normalesup.org/~simonet/soft/ow/update/"/>
       </setupTask>
       <setupTask
           xsi:type="setup.p2:P2Task"
@@ -140,7 +153,8 @@
     <version
         name="php5"
         label="PHP5"
-        requiredJavaVersion="1.7">
+        requiredJavaVersion="1.7"
+          licenseConfirmationDisabled="true">
       <setupTask
           xsi:type="setup.p2:P2Task"
           label="oxygen">
@@ -185,11 +199,6 @@
         <repository
             url="http://p2-dev.pdt-extensions.org/"/>
       </setupTask>
-      <setupTask
-          xsi:type="setup:PreferenceTask"
-          id="pref.pespective"
-          key="/instance/org.eclipse.ui/defaultPerspectiveId"
-          value="org.eclipse.jdt.ui.PHPPerspective"/>
       <description>PHP IDE</description>
     </version>
     <version
@@ -198,7 +207,8 @@
         requiredJavaVersion="1.8">
       <setupTask
           xsi:type="setup.p2:P2Task"
-          label="oxygen">
+          label="oxygen"
+          licenseConfirmationDisabled="true">
         <requirement
             name="org.eclipse.platform.ide"/>
         <requirement
@@ -224,5 +234,6 @@
       </setupTask>
       <description>OOMPH authoring.</description>
     </version>
+    <description>katagena.com dev version</description>
   </product>
 </setup:ProductCatalog>

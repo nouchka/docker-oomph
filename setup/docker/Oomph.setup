@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
+    xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
+    name="oomph"
+    label="oomph">
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Platform Git Clones github">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="platform.common.git.location"
+        value="/home/developer/projects/github"/>
+      <setupTask
+          id="oomph.clone"
+          xsi:type="git:GitCloneTask"
+          location="${platform.common.git.location}/oomph"
+          remoteURI="https://github.com/${github.user.id}/docker-oomph.git"
+          pushURI="https://github.com/${github.user.id}/docker-oomph.git"
+          checkoutBranch="master"/>
+      <setupTask
+          xsi:type="git:GitCloneTask"
+          location="${platform.common.git.location}/oomph2"
+          remoteURI="https://github.com/${github.user.id}/docker-oomph.git"
+          checkoutBranch="master"/>
+      <setupTask
+          xsi:type="projects:ProjectsImportTask">
+        <sourceLocator rootFolder="${oomph.clone.location}"/>
+      </setupTask>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="installation.location"
+      defaultValue="${workspace-docker.location|uri}/${scope.project.label}"/>
+  <setupTask
+      xsi:type="setup.workingsets:WorkingSetTask">
+    <workingSet
+        name="docker"/>
+    <description>The dynamic working sets for ${scope.project.label}</description>
+  </setupTask>
+  <stream name="master"
+      label="Master"/>
+  <description>docker oomph</description>
+</setup:Project>

@@ -3,7 +3,7 @@ version: '3'
 services:
   eclipse_installer:
     build: .
-    image: nouchka/oomph:latest
+    image: nouchka/oomph:php7
     environment:
       - DISPLAY=unix$DISPLAY
       - ECLIPSE_VERSION=katagena-oxygen
@@ -24,11 +24,3 @@ volumes:
     driver: local
   eclipse:
     driver: local
-
-##  workspace:
-##    driver: local
-##  eclipse_configuration:
-##    driver: local
-##  p2_configuration:
-##    driver: local
-

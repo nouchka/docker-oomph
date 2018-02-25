@@ -9,31 +9,6 @@
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Global Variables">
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="git.user.id"
-        defaultValue="anonymous"
-        label="Eclipse Git/Gerrit user ID"
-        documentation="The Eclipse user ID for Git/Gerrit commits.  Use 'anonymous' if you have no Eclipse user ID.">
-      <description>The user ID of the Eclipse Git/Gerrit account</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="git.author.name"
-        label="Eclipse author name for Git/Gerrit"
-        documentation="The Eclipse author name for Git/Gerrit commits.  Use 'Anonymous' if you're not a registered Eclipse Git author or don't plan to commit to Git.">
-      <description>The author name used for Git/Gerrit commits</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="git.author.email"
-        label="Eclipse author email for Git/Gerrit"
-        documentation="The Eclipse author email for Git/Gerrit commits.  Use 'anonymous@example.com' if you're not a registered Eclipse Git author or don't plan to commit to Git.">
-      <description>The email address associated with Git/Gerrit commits</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:CompoundTask"
-        name="Github">
       <setupTask
           xsi:type="setup:VariableTask"
           name="github.user.id"
@@ -42,32 +17,31 @@
       </setupTask>
       <setupTask
           xsi:type="setup:VariableTask"
-          name="github.author.name"
-          label="Github author name"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="github.author.email"
-          label="Github author email"/>
-      <setupTask
-          xsi:type="setup:VariableTask"
           name="github.remoteURIs"
+          value="git@github.com:@{remoteURI}.git"
           label="Github repository">
-        <choice
-            value="git@github.com:@{remoteURI}.git"
-            label="Git (read-write)"/>
-        <choice
-            value="https://${github.user.id}@github.com/@{remoteURI}.git"
-            label="HTTPS (read-write)"/>
-        <choice
-            value="http://github.com/@{remoteURI}.git"
-            label="HTTP (read-only, anonymous)"/>
         <description>Choose from the available Github URIs</description>
       </setupTask>
-    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup:WorkspaceTask"
-      id="workspace"/>
+      id="workspace-docker"
+      filter=""
+      location="${user.home}/workspace/docker"/>
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace-symfony"
+      filter=""
+      location="${user.home}/workspace/symfony"/>
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace"
+      filter=""
+      location="${user.home}/workspace/system"/>
+  <setupTask
+      xsi:type="setup:ResourceCreationTask"
+      content="MAX_RECENT_WORKSPACES=5&#xD;&#xA;RECENT_WORKSPACES=${workspace.location|property}\n${workspace-docker.location|property}\n${workspace-symfony.location|property}&#xD;&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xD;&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xD;&#xA;eclipse.preferences.version=1"
+      targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"/>
   <setupTask
       xsi:type="setup:TextModifyTask"
       url="configuration:/config.ini">
@@ -78,6 +52,7 @@
   </setupTask>
   <project name="docker"
       label="docker">
+    <project href="http://setup/docker/Oomph.setup#/"/>
   </project>
   <project name="web"
       label="web">
