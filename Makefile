@@ -9,10 +9,13 @@ build-all: build
 	export DOCKER_TAG=php7;export IMAGE_NAME="nouchka/oomph:php7"; ./hooks/build
 
 test:
+	docker-compose up -d
+
+test-build:
 	docker-compose build
 	docker-compose up -d
 
 clean:
-	docker rmi nouchka/oomph
+	##docker rmi nouchka/oomph
 	docker-compose down -v
 
