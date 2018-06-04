@@ -4,9 +4,11 @@ services:
   eclipse_installer:
     build: .
     image: nouchka/oomph:php7
+    container_name: "neon"
+    hostname: "eclipse"
     environment:
       - DISPLAY=unix$DISPLAY
-      - ECLIPSE_VERSION=katagena-oxygen
+      - ECLIPSE_VERSION=katagena-php7
     volumes:
       - ~/.ssh/:/home/developer/.ssh/:ro
       - ~/.gitconfig:/home/developer/.gitconfig:ro
@@ -14,6 +16,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - eclipse:/home/developer/eclipse/ ##volume for differents eclipses versions
       - installer:/opt/eclipse-installer/ ##volume for the installer to keep update
+      - workspace:/home/developer/workspace/ ##volume for workspaces
   setup:
     image: nouchka/lighttpd
     volumes:
@@ -23,4 +26,6 @@ volumes:
   installer:
     driver: local
   eclipse:
+    driver: local
+  workspace:
     driver: local

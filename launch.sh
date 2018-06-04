@@ -8,5 +8,14 @@ debug = false
 EOF
 fi
 
+if [ "$ECLIPSE_VERSION" ]; then
+	if [ -d "/home/developer/eclipse/$ECLIPSE_VERSION" ]; then
+		/home/developer/eclipse/$ECLIPSE_VERSION/eclipse/eclipse -nosplash
+		exit 0
+	else
+		echo "$ECLIPSE_VERSION not present in /home/developer/eclipse/ launching installer"
+	fi
+	
+fi
 ##-Doomph.redirection.setups=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->setups/
 /opt/eclipse-installer/eclipse-inst -vmargs "-Doomph.redirection.setups=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->http://setup/"

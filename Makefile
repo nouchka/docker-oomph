@@ -2,20 +2,15 @@
 
 build:
 	chmod +x ./hooks/build
-	export DOCKER_TAG=latest;export IMAGE_NAME="nouchka/oomph:latest"; ./hooks/build
+	export DOCKER_TAG=php7;export IMAGE_NAME="nouchka/oomph:php7"; ./hooks/build
 
 build-all: build
 	export DOCKER_TAG=php5;export IMAGE_NAME="nouchka/oomph:php5"; ./hooks/build
-	export DOCKER_TAG=php7;export IMAGE_NAME="nouchka/oomph:php7"; ./hooks/build
+	export DOCKER_TAG=latest;export IMAGE_NAME="nouchka/oomph:latest"; ./hooks/build
 
-test:
+test: build
 	docker-compose up -d
 
-test-build:
-	docker-compose build
-	docker-compose up -d
-
-clean:
+down:
 	##docker rmi nouchka/oomph
 	docker-compose down -v
-
