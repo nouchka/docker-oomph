@@ -14,7 +14,7 @@ ENV PUID ${PUID}
 ENV PGID ${PGID}
 
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -yq install wget git libcanberra-gtk3-module ssh-askpass openssh-client && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl && \
 	[ "$DOCKER_TAG" != "php7" ] || apt-get -yq install openjdk-8-jdk php7.0 php-cli php-xdebug php-intl php-xml && \
 	[ "$DOCKER_TAG" != "php5" ] || apt-get -yq install openjdk-7-jdk php5 php5-cli php5-xdebug && \
 	[ "$DOCKER_TAG" != "latest" ] || apt-get -yq install openjdk-8-jdk && \
