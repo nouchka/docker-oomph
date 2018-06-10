@@ -7,3 +7,12 @@ Lighttpd make setup files available. Mount your own files.
 
 Extends nouchka/oomph:latest with your own packages to have the right env.
 
+
+# Checklist
+
++   format on save for php project
++   git working on repositories
++   auto-deriv files auto-set
++   show whitespaces, line number
++   disable auto-ignore file
+

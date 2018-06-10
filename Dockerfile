@@ -12,13 +12,17 @@ LABEL version="${DOCKER_TAG}"
 
 ENV PUID ${PUID}
 ENV PGID ${PGID}
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -yq install wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl locales curl && \
 	[ "$DOCKER_TAG" != "php7" ] || apt-get -yq install openjdk-8-jdk php7.0 php-cli php-xdebug php-intl php-xml && \
 	[ "$DOCKER_TAG" != "php5" ] || apt-get -yq install openjdk-7-jdk php5 php5-cli php5-xdebug && \
 	[ "$DOCKER_TAG" != "latest" ] || apt-get -yq install openjdk-8-jdk && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+	locale-gen en_US.UTF-8 && \
 	wget "${ECLIPSE_OOMPH_INSTALLER_TAR_URL}" -O /tmp/eclipse-inst.tar.gz -q && \
 	tar -xf /tmp/eclipse-inst.tar.gz -C ${ECLIPSE_OOMPH_INSTALLER_DIRECTORY} && \
 	rm /tmp/eclipse-inst.tar.gz && \

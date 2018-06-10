@@ -32,12 +32,17 @@
       xsi:type="setup:WorkspaceTask"
       id="workspace-symfony"
       filter=""
-      location="${user.home}/workspace/symfony"/>
+      location="${user.home}/workspace/web"/>
   <setupTask
       xsi:type="setup:WorkspaceTask"
       id="workspace"
       filter=""
       location="${user.home}/workspace/system"/>
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace"
+      filter=""
+      location="${user.home}/workspace/work"/>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
       content="MAX_RECENT_WORKSPACES=5&#xD;&#xA;RECENT_WORKSPACES=${workspace.location|property}\n${workspace-docker.location|property}\n${workspace-symfony.location|property}&#xD;&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xD;&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xD;&#xA;eclipse.preferences.version=1"

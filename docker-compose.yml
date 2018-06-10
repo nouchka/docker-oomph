@@ -16,7 +16,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - eclipse:/home/developer/eclipse/ ##volume for differents eclipses versions
       - installer:/opt/eclipse-installer/ ##volume for the installer to keep update
-      - workspace:/home/developer/workspace/ ##volume for workspaces
+      - ~/Desktop/workspace/:/home/developer/workspace/
   setup:
     image: nouchka/lighttpd
     volumes:
@@ -26,6 +26,4 @@ volumes:
   installer:
     driver: local
   eclipse:
-    driver: local
-  workspace:
     driver: local

@@ -10,7 +10,7 @@ fi
 
 if [ "$ECLIPSE_VERSION" ]; then
 	if [ -d "/home/developer/eclipse/$ECLIPSE_VERSION" ]; then
-		/home/developer/eclipse/$ECLIPSE_VERSION/eclipse/eclipse -nosplash
+		/home/developer/eclipse/$ECLIPSE_VERSION/eclipse/eclipse -nosplash -DLC_CTYPE=UTF-8 -Dfile.encoding=UTF-8
 		exit 0
 	else
 		echo "$ECLIPSE_VERSION not present in /home/developer/eclipse/ launching installer"
