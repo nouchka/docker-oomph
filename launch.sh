@@ -1,5 +1,9 @@
 #!/bin/bash
 
+[ $PROJECT ] || exit 1
+
+mkdir -p /home/developer/workspace/$PROJECT/
+
 if [ "$WAKATIME_KEY" ]; then
 	cat > /home/developer/.wakatime.cfg <<EOF
 [settings]
@@ -18,4 +22,4 @@ if [ "$ECLIPSE_VERSION" ]; then
 	
 fi
 ##-Doomph.redirection.setups=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->setups/
-/opt/eclipse-installer/eclipse-inst -vmargs "-Doomph.redirection.setups=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->http://setup/"
+/opt/eclipse-installer/eclipse-inst -vmargs "-Doomph.redirection.setups=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->$SETUP_URL"

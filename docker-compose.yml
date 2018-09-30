@@ -5,25 +5,32 @@ services:
     build: .
     image: nouchka/oomph:php7
     container_name: "neon"
-    hostname: "eclipse"
+    hostname: "neon"
     environment:
       - DISPLAY=unix$DISPLAY
       - ECLIPSE_VERSION=katagena-php7
+      - PROJECT=neon
+      - SETUP_URL=http://setup/
     volumes:
       - ~/.ssh/:/home/developer/.ssh/:ro
       - ~/.gitconfig:/home/developer/.gitconfig:ro
       - ~/.gitignore:/home/developer/.gitignore:ro
       - /tmp/.X11-unix:/tmp/.X11-unix
       - eclipse:/home/developer/eclipse/ ##volume for differents eclipses versions
-      - installer:/opt/eclipse-installer/ ##volume for the installer to keep update
-      - ~/Desktop/workspace/:/home/developer/workspace/
+      - eclipse_installer:/opt/eclipse-installer/ ##volume for the installer to keep update
+      - eclipse_workspace:/home/developer/workspace/
+      - project:/home/developer/project/
   setup:
     image: nouchka/lighttpd
     volumes:
       - ./setup:/var/www/localhost/htdocs
 
 volumes:
-  installer:
-    driver: local
   eclipse:
+    driver: local
+  eclipse_installer:
+    driver: local
+  eclipse_workspace:
+    driver: local
+  project:
     driver: local
