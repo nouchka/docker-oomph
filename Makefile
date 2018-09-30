@@ -14,3 +14,16 @@ test: build
 down:
 	##docker rmi nouchka/oomph
 	docker-compose down -v
+
+test-dockerapp:
+	@$(eval CURRENT_USER = $(shell whoami))
+	@mkdir -p /home/$(CURRENT_USER)/.eclipse/eclipses/ /home/$(CURRENT_USER)/.eclipse/installer/ /home/$(CURRENT_USER)/.eclipse/workspaces/
+	@docker volume create --name eclipse -o type=none -o device=/home/$(CURRENT_USER)/.eclipse/eclipses/ -o o=bind
+	@docker volume create --name eclipse_installer -o type=none -o device=/home/$(CURRENT_USER)/.eclipse/installer/ -o o=bind
+	@docker volume create --name eclipse_workspace -o type=none -o device=/home/$(CURRENT_USER)/.eclipse/workspaces/ -o o=bind
+	docker volume create --name test -o type=none -o device=/tmp/ -o o=bind
+	docker-app render --set USER=$(CURRENT_USER)
+	sleep 10
+	docker-app render --set USER=$(CURRENT_USER)| docker-compose -f - up
+	docker-app render --set USER=$(CURRENT_USER)| docker-compose down -v
+	docker volume rm test
