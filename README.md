@@ -16,3 +16,9 @@ Extends nouchka/oomph:latest with your own packages to have the right env.
 +   show whitespaces, line number
 +   disable auto-ignore file
 
+# TODO
++   mount sub-directory of volume (docker issue)
++   user check right of volumes
++   create volume / network
++   delete test volume
++   push to docker hub
