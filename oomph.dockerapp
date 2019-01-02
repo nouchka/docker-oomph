@@ -25,12 +25,15 @@ services:
       - /home/$USER/.gitignore:/home/developer/.gitignore:ro
       - /tmp/.X11-unix:/tmp/.X11-unix
       - eclipse:/home/developer/eclipse/ ##volume for differents eclipses versions
+      - eclipse_plugins:/home/developer/.p2/ ##volume for plugins
       - eclipse_installer:/opt/eclipse-installer/ ##volume for the installer to keep update
       - eclipse_workspace:/home/developer/workspace/
       - project:/home/developer/project/
 
 volumes:
   eclipse:
+    external: true
+  eclipse_plugins:
     external: true
   eclipse_installer:
     external: true
