@@ -49,6 +49,7 @@ RUN export uid=${PUID} gid=${PGID} && \
 
 USER developer
 ENV HOME /home/developer
-VOLUME /home/developer/eclipse/ /opt/eclipse-installer/ /home/developer/.p2/pool/
+VOLUME /home/developer/eclipse/ /opt/eclipse-installer/ /home/developer/.p2/ /home/developer/workspace/
 
 CMD /launch.sh
+
