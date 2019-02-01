@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
 
-if [ "$DOCKER_TAG" = "latest" ]; then
+if [ "$DOCKER_TAG" = "php7" ] || [ "$DOCKER_TAG" = "latest" ]; then
 	BASE_IMAGE=ubuntu:xenial
-elif [ "$DOCKER_TAG" = "php7" ]; then
-	BASE_IMAGE=ubuntu:xenial
+	JDK_VERSION=8
+	PHP_VERSION=7.0
+elif [ "$DOCKER_TAG" = "php72" ]; then
+	BASE_IMAGE=ubuntu:bionic
+	JDK_VERSION=11
+	PHP_VERSION=7.2
+elif [ "$DOCKER_TAG" = "php73" ]; then
+	BASE_IMAGE=ubuntu:disco
+	JDK_VERSION=11
+	PHP_VERSION=7.3
 elif [ "$DOCKER_TAG" = "php5" ]; then
 	BASE_IMAGE=debian:jessie
+	JDK_VERSION=7
+	PHP_VERSION=5
 else
 	echo "Need to specify base image"
 	exit 1
@@ -13,5 +23,7 @@ fi
 
 docker build -t ${IMAGE_NAME} \
 	--build-arg=BASE_IMAGE=$BASE_IMAGE \
+	--build-arg=JDK_VERSION=$JDK_VERSION \
+	--build-arg=PHP_VERSION=$PHP_VERSION \
 	--build-arg=DOCKER_TAG=$DOCKER_TAG \
 	.

@@ -1,22 +1,22 @@
-version: '3'
+version: '3.6'
 
 services:
   eclipse_installer:
-    build: .
-    image: nouchka/oomph:php7
-    container_name: "neon"
-    hostname: "neon"
+    image: nouchka/oomph:php72
+    container_name: "eclipse_test"
+    hostname: "eclipse_test"
     environment:
       - DISPLAY=unix$DISPLAY
-      - ECLIPSE_VERSION=katagena-php7
-      - PROJECT=neon
+      - ECLIPSE_VERSION=katagena-php72
+      - PROJECT=test
       - SETUP_URL=http://setup/
     volumes:
       - ~/.ssh/:/home/developer/.ssh/:ro
       - ~/.gitconfig:/home/developer/.gitconfig:ro
       - ~/.gitignore:/home/developer/.gitignore:ro
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - eclipse:/home/developer/eclipse/ ##volume for differents eclipses versions
+      - eclipse_setups:/home/developer/eclipse/ ##volume for differents eclipses versions
+      - eclipse_plugins:/home/developer/.p2/ ##volume for plugins
       - eclipse_installer:/opt/eclipse-installer/ ##volume for the installer to keep update
       - eclipse_workspace:/home/developer/workspace/
       - project:/home/developer/project/
@@ -26,7 +26,9 @@ services:
       - ./setup:/var/www/localhost/htdocs
 
 volumes:
-  eclipse:
+  eclipse_setups:
+    driver: local
+  eclipse_plugins:
     driver: local
   eclipse_installer:
     driver: local
