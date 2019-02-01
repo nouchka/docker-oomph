@@ -95,6 +95,99 @@
   <product name="epp.package.katagena"
       label="Eclipse Standard/SDK">
     <version
+        name="php72"
+        label="PHP72"
+        requiredJavaVersion="1.10">
+      <description>PHP IDE</description>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="2018-12"
+          licenseConfirmationDisabled="true">
+        <requirement
+            name="org.eclipse.platform.ide"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"/>
+        <requirement
+            name="net.nodj.AutoDerivFeature.feature.group"/>
+        <requirement
+            name="org.eclipse.oomph.setup.feature.group"/>
+        <repository
+            url="http://download.eclipse.org/releases/2018-12"/>
+        <repository
+            url="http://nodj.github.io/AutoDeriv/update"/>
+	    <repository
+            url="http://www.normalesup.org/~simonet/soft/ow/update/"/>
+      </setupTask>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="PHP"
+          licenseConfirmationDisabled="true">
+        <requirement
+            name="org.eclipse.php.feature.group"/>
+	    <repository
+            url="http://download.eclipse.org/tools/pdt/updates/6.1"/>
+        <repository
+            url="http://p2-dev.pdt-extensions.org/"/>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+      name="org.eclipse.php.ui">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.php.ui/cleanup.format.on.save"
+            value="true"/>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          id="pref.pespective"
+          key="/instance/org.eclipse.ui/defaultPerspectiveId"
+          value="org.eclipse.jdt.ui.PHPPerspective"/>
+      <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.php.debug.core">
+            <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.core.zendDebuggerSettingsProvider"
+          value="&lt;settings>&lt;clientIp>172.26.0.3,127.0.0.1&lt;/clientIp>&lt;clientPort>10137&lt;/clientPort>&lt;ownerId>php-server-606825c2-6fdc-49bf-b3a6-43ec2acd1e63&lt;/ownerId>&lt;responseTimeout>60000&l
+t;/responseTimeout>&lt;/settings>${0x5}&lt;settings>&lt;clientPort>10137&lt;/clientPort>&lt;ownerId>php-exe-ce3f1012-18e0-4062-bb93-935cbc4cb534&lt;/ownerId>&lt;/settings>${0x5}&lt;settings>&lt;clientIp>172.26.0.
+3,127.0.0.1&lt;/clientIp>&lt;clientPort>10137&lt;/clientPort>&lt;ownerId>php-server-ad1af97b-e5ff-4c80-b3cc-dd56939562b2&lt;/ownerId>&lt;responseTimeout>60000&lt;/responseTimeout>&lt;/settings>"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.coredefaultPHP"
+          value="PHP 7.2 (CLI)"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.coreinstalledPHPDebuggers"
+          value="org.eclipse.php.debug.core.noneDebugger"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.coreinstalledPHPInis"
+          value="/etc/php/7.2/cli/php.ini"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.coreinstalledPHPLoadIniDefaults"
+          value="false"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.coreinstalledPHPLocations"
+          value="/usr/bin/php7.2"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.coreinstalledPHPNames"
+          value="PHP 7.2 (CLI)"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.coreinstalledPHPUniqueIds"
+          value="php-exe-ce3f1012-18e0-4062-bb93-935cbc4cb534"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.php.debug.core/org.eclipse.php.debug.corephp_versions"
+          value="php7.2"/>
+    </setupTask>
+    </version>
+<version
         name="php7"
         label="PHP7"
         requiredJavaVersion="1.8">
@@ -276,4 +369,3 @@ t;/responseTimeout>&lt;/settings>${0x5}&lt;settings>&lt;clientPort>10137&lt;/cli
     <description>katagena.com dev version</description>
   </product>
 </setup:ProductCatalog>
-
