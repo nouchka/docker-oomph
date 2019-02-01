@@ -23,8 +23,8 @@ COPY user.setup /user.setup
 
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq install wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl locales && \
-	[ "$DOCKER_TAG" == "php5" ] || DEBIAN_FRONTEND=noninteractive apt-get -yq install php${PHP_VERSION} php-cli php-xdebug php-intl php-xml && \
-	[ "$DOCKER_TAG" != "php5" ] || apt-get -yq install php5 php5-cli php5-xdebug && \
+	[ "$PHP_VERSION" == "5" ] || DEBIAN_FRONTEND=noninteractive apt-get -yq install php${PHP_VERSION} php-cli php-xdebug php-intl php-xml && \
+	[ "$PHP_VERSION" != "5" ] || apt-get -yq install php5 php5-cli php5-xdebug && \
 	apt-get -yq install openjdk-${JDK_VERSION}-jdk && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	locale-gen en_US.UTF-8 && \
