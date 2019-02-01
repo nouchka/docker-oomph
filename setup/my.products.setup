@@ -92,16 +92,6 @@
       option="-Doomph.setup"
       value="=true"
       vm="true"/>
-  <setupTask
-      xsi:type="setup:EclipseIniTask"
-      option="-Xms"
-      value="512m"
-      vm="true"/>
-  <setupTask
-      xsi:type="setup:EclipseIniTask"
-      option="-Xmx"
-      value="2048m"
-      vm="true">
   <product name="epp.package.katagena"
       label="Eclipse Standard/SDK">
     <version
@@ -286,3 +276,4 @@ t;/responseTimeout>&lt;/settings>${0x5}&lt;settings>&lt;clientPort>10137&lt;/cli
     <description>katagena.com dev version</description>
   </product>
 </setup:ProductCatalog>
+
