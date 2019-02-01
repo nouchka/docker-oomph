@@ -11,7 +11,7 @@ build:
 	$(MAKE) -s build-version VERSION=latest
 
 build-latest:
-	$(MAKE) -s build VERSION=latest
+	$(MAKE) -s build-version VERSION=latest
 
 check-version:
 	echo $(VERSION)
