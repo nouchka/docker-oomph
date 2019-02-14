@@ -21,6 +21,7 @@ ENV LC_ALL en_US.UTF-8
 COPY launch.sh /launch.sh
 COPY user.setup /user.setup
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq install gnupg2 wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl locales && \
 	[ "$PHP_VERSION" == "5" ] || DEBIAN_FRONTEND=noninteractive apt-get -yq install php${PHP_VERSION} php-cli php-xdebug php-intl php-xml && \
@@ -54,5 +55,5 @@ USER developer
 ENV HOME /home/developer
 VOLUME /home/developer/eclipse/ /opt/eclipse-installer/ /home/developer/.p2/ /home/developer/workspace/
 
-CMD /launch.sh
 
+ENTRYPOINT [ "/launch.sh" ]
