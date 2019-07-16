@@ -23,7 +23,7 @@ COPY user.setup /user.setup
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -yq install gnupg2 wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl locales && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install gnupg2 wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl locales fonts-takao-mincho && \
 	[ "$PHP_VERSION" == "5" ] || DEBIAN_FRONTEND=noninteractive apt-get -yq install php${PHP_VERSION} php-cli php-xdebug php-intl php-xml && \
 	[ "$PHP_VERSION" != "5" ] || apt-get -yq install php5 php5-cli php5-xdebug && \
 	apt-get -yq install openjdk-${JDK_VERSION}-jdk && \
