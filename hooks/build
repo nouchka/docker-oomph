@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "$DOCKER_TAG" = "php7" ] || [ "$DOCKER_TAG" = "latest" ]; then
+if [ "$DOCKER_TAG" = "php7" ]; then
 	BASE_IMAGE=ubuntu:xenial
 	JDK_VERSION=8
 	PHP_VERSION=7.0
@@ -12,6 +12,10 @@ elif [ "$DOCKER_TAG" = "php73" ]; then
 	BASE_IMAGE=ubuntu:disco
 	JDK_VERSION=11
 	PHP_VERSION=7.3
+elif [ "$DOCKER_TAG" = "php74" ] || [ "$DOCKER_TAG" = "latest" ]; then
+	BASE_IMAGE=ubuntu:focal
+	JDK_VERSION=11
+	PHP_VERSION=7.4
 elif [ "$DOCKER_TAG" = "php5" ]; then
 	BASE_IMAGE=debian:jessie
 	JDK_VERSION=7
