@@ -6,10 +6,10 @@ ARG ECLIPSE_OOMPH_INSTALLER_TAR_URL=http://ftp-stud.fht-esslingen.de/pub/Mirrors
 ENV ECLIPSE_OOMPH_INSTALLER_DIRECTORY=/opt
 ARG PUID=1000
 ARG PGID=1000
-ARG BASE_IMAGE=ubuntu:xenial
-ARG DOCKER_TAG=php7
-ARG JDK_VERSION=8
-ARG PHP_VERSION=7.0
+ARG BASE_IMAGE=ubuntu:focal
+ARG DOCKER_TAG=php74
+ARG JDK_VERSION=11
+ARG PHP_VERSION=7.4
 LABEL version="${DOCKER_TAG}"
 
 ENV PUID ${PUID}
@@ -24,8 +24,7 @@ COPY user.setup /user.setup
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq install python gnupg2 wget git libcanberra-gtk3-module ssh-askpass openssh-client wmctrl locales fonts-takao-mincho && \
-	[ "$PHP_VERSION" == "5" ] || DEBIAN_FRONTEND=noninteractive apt-get -yq install php${PHP_VERSION} php-cli php-xdebug php-intl php-xml && \
-	[ "$PHP_VERSION" != "5" ] || apt-get -yq install php5 php5-cli php5-xdebug && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install php${PHP_VERSION} php-cli php-xdebug php-intl php-xml && \
 	apt-get -yq install openjdk-${JDK_VERSION}-jdk && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	locale-gen en_US.UTF-8 && \

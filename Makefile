@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := build
 
-VERSIONS=php5 php7 php72 php73 php74
+VERSIONS=php72 php74
 
 build-version:
 	chmod +x ./hooks/build
