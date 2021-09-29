@@ -31,9 +31,6 @@ RUN apt-get update && \
 	wget "${ECLIPSE_OOMPH_INSTALLER_TAR_URL}" -O /tmp/eclipse-inst.tar.gz -q && \
 	tar -xf /tmp/eclipse-inst.tar.gz -C ${ECLIPSE_OOMPH_INSTALLER_DIRECTORY} && \
 	rm /tmp/eclipse-inst.tar.gz && \
-	wget "http://get.sensiolabs.org/php-cs-fixer.phar" -O php-cs-fixer && \
-	chmod a+x php-cs-fixer && \
-	mv php-cs-fixer /usr/local/bin/php-cs-fixer && \
 	wget -qO- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 	php /usr/local/bin/composer self-update && \
 	export uid=${PUID} gid=${PGID} && \

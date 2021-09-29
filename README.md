@@ -1,4 +1,9 @@
 # docker-oomph
+[![Docker pull](https://img.shields.io/docker/pulls/nouchka/oomph)](https://hub.docker.com/r/nouchka/oomph/)
+[![Docker stars](https://img.shields.io/docker/stars/nouchka/oomph)](https://hub.docker.com/r/nouchka/oomph/)
+[![Build Status](https://gitlab.com/japromis/docker-oomph/badges/master/pipeline.svg)](https://gitlab.com/japromis/docker-oomph/pipelines)
+[![Docker size](https://img.shields.io/docker/image-size/nouchka/oomph/latest)](https://hub.docker.com/r/nouchka/oomph/)
+
 Eclipse setup using oomph in a docker container
 
 Lighttpd make setup files available. Mount your own files.

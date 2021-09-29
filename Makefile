@@ -1,27 +1,13 @@
-.DEFAULT_GOAL := build
-
+DOCKER_IMAGE=oomph
 VERSIONS=php72 php74
 
-build-version:
-	chmod +x ./hooks/build
-	export DOCKER_TAG=$(VERSION);export IMAGE_NAME="nouchka/oomph:$(VERSION)"; ./hooks/build
+include Makefile.docker
 
-build:
-	$(foreach version,$(VERSIONS), $(MAKE) -s build-version VERSION=$(version);)
-	$(MAKE) -s build-version VERSION=latest
-
-build-latest:
-	$(MAKE) -s build-version VERSION=latest
-
+.PHONY: check-version
 check-version:
-	echo $(VERSION)
-	docker run --rm nouchka/oomph:$(VERSION) php -v|head -n1
-	docker run --rm nouchka/oomph:$(VERSION) java -version|head -n1
-	docker run --rm nouchka/oomph:$(VERSION) composer --version
-
-check:
-	$(foreach version,$(VERSIONS), $(MAKE) -s check-version VERSION=$(version);)
-	$(MAKE) -s check-version VERSION=latest
+	docker run --rm --entrypoint php $(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) -v|head -n1| awk '{print $$2}'
+	docker run --rm --entrypoint dpkg $(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) -l| grep jdk|head -n1|awk '{print $$3}'
+	docker run --rm --entrypoint composer $(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) --version| awk '{print $$3}'
 
 test: build-latest
 	docker-compose up -d
