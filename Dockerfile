@@ -1,16 +1,12 @@
-ARG  BASE_IMAGE=ubuntu:xenial
-FROM ${BASE_IMAGE}
-LABEL maintainer="Jean-Avit Promis docker@katagena.com"
+FROM ubuntu:focal
 
 ARG ECLIPSE_OOMPH_INSTALLER_TAR_URL=http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/oomph/products/eclipse-inst-linux64.tar.gz
 ENV ECLIPSE_OOMPH_INSTALLER_DIRECTORY=/opt
 ARG PUID=1000
 ARG PGID=1000
-ARG BASE_IMAGE=ubuntu:focal
 ARG DOCKER_TAG=php74
 ARG JDK_VERSION=11
 ARG PHP_VERSION=7.4
-LABEL version="${DOCKER_TAG}"
 
 ENV PUID ${PUID}
 ENV PGID ${PGID}
